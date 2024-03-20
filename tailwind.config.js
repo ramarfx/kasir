@@ -8,6 +8,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+        'node_modules/flowbite-react/lib/esm/**/*.js',
     ],
 
     theme: {
@@ -15,8 +16,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primary: '#09090B'
+            }
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require('flowbite/plugin')],
 };
