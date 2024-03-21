@@ -1,7 +1,15 @@
 import Navbar from "@/Components/Navbar";
 import { Button } from "@/Components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/Components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/Components/ui/card";
 
+const data = [1, 2, 3, 4, 5, 6, 1, 1];
 
 const Home = () => {
   return (
@@ -10,18 +18,20 @@ const Home = () => {
 
       <div className="flex">
         <div className="grid grid-cols-4 p-2 gap-2 w-3/4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <Button>add</Button>
-            </CardFooter>
-          </Card>
+          {data.map((item) => (
+            <Card>
+              <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Card Content</p>
+              </CardContent>
+              <CardFooter>
+                <Button>add</Button>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
 
         <div className="w-1/4 border-l border-border/40 p-5">
