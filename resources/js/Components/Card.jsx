@@ -1,6 +1,4 @@
-"use client";
 
-import { Card } from "flowbite-react";
 
 const custom = {
     root: {

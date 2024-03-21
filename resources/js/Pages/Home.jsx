@@ -1,10 +1,9 @@
-import Card from "@/Components/Card";
-import Navbar from "@/Components/Navbar";
+import { Button } from "@/Components/ui/button";
 
 const Home = () => {
     return (
         <div>
-            <Navbar />
+            {/* <Navbar />
 
             <div className="flex">
                 <div className="grid grid-cols-4 p-2 gap-2 w-3/4">
@@ -21,7 +20,8 @@ const Home = () => {
                 <div className="w-1/4 border-l p-5">
                     <h1 className="text-primary font-bold text-2xl">Keranjang</h1>
                 </div>
-            </div>
+            </div> */}
+            <Button key={1} variant="default">Button</Button>
         </div>
     );
 };
