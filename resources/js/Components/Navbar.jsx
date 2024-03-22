@@ -3,7 +3,7 @@ import NavLink from "./NavLink";
 
 const Navbar = () => {
   return (
-    <header className="w-full flex border-b border-border/40 sticky top-0 z-50 backdrop-blur">
+    <header className="w-full flex border-b border-border sticky top-0 z-50 backdrop-blur">
       <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
 
         <div className="mr-4 flex items-center">
