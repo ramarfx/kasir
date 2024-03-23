@@ -53,7 +53,7 @@ const TableCart = (props) => {
         <div>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">Total</h1>
           <p className="font-bold text-lg">
-            {cart.length > 0 &&
+            {
               totalPrice.toLocaleString("id-ID", {
                 style: "currency",
                 currency: "IDR",
