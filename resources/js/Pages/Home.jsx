@@ -14,10 +14,11 @@ import {
 import CartItem from "@/Components/CartItem";
 import { Input } from "@/Components/ui/input";
 import { ScrollArea } from "@/Components/ui/scroll-area";
+import { useEffect } from "react";
 
-const data = [1, 2, 3, 4, 5, 6, 1, 1, 2, 2, 2,2 , 2];
+const data = [1, 2, 3, 4, 5, 6, 1, 1, 2, 2, 2, 2, 2];
 
-const Home = () => {
+const Home = ({ products }) => {
   return (
     <div>
       <Navbar />
@@ -25,16 +26,22 @@ const Home = () => {
       <div className="flex">
         <div className="w-3/4">
           <div className="grid grid-cols-4 p-2 gap-2 ">
-            {data.map((item, i) => (
-              <Card key={i}>
+            {products.map((product) => (
+              <Card key={product.id}>
                 <CardHeader>
-                  <CardImg src="/a.webp" />
+                  <CardImg src={product.image} />
                 </CardHeader>
                 <CardContent>
-                  <CardTitle>Ikan goreng</CardTitle>
+                  <CardTitle>{product.name}</CardTitle>
                 </CardContent>
                 <CardFooter>
-                  <CardDescription>Rp. 599.000</CardDescription>
+                  <CardDescription className="text-base">
+                    {product.price.toLocaleString("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    })}
+                  </CardDescription>
                   <Button className="px-10">add</Button>
                 </CardFooter>
               </Card>
@@ -48,13 +55,13 @@ const Home = () => {
 
             <ScrollArea className=" h-40 border border-border">
               <div className="flex flex-col gap-3 p-4">
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
-              <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
+                <CartItem title="Ikan goreng" quantity={1} price={599000} />
               </div>
             </ScrollArea>
 
@@ -79,7 +86,10 @@ const Home = () => {
                 <Button variant="outline">Bank</Button>
               </div>
 
-              <Input type='number' placeholder={"Masukkan Nomor Telepon E-Wallet"} />
+              <Input
+                type="number"
+                placeholder={"Masukkan Nomor Telepon E-Wallet"}
+              />
             </div>
 
             <div className="mt-10">
