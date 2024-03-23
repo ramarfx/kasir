@@ -1,6 +1,5 @@
 import Navbar from "@/Components/Navbar";
 import { Button } from "@/Components/ui/button";
-import { Badge } from "@/Components/ui/badge.jsx";
 
 import {
   Card,
@@ -11,15 +10,13 @@ import {
   CardImg,
   CardTitle,
 } from "@/Components/ui/card";
-import CartItem from "@/Components/CartItem";
-import { Input } from "@/Components/ui/input";
-import { ScrollArea } from "@/Components/ui/scroll-area";
-import { useEffect } from "react";
-import Kasir from "@/Components/Kasir";
-
-const data = [1, 2, 3, 4, 5, 6, 1, 1, 2, 2, 2, 2, 2];
+import { useDispatch } from "react-redux";
+import { addtoCart } from "@/redux/slices/cartSlice";
+import TableCart from "@/Components/Kasir";
 
 const Home = ({ products }) => {
+  const dispatch = useDispatch()
+
   return (
     <div>
       <Navbar />
@@ -43,7 +40,7 @@ const Home = ({ products }) => {
                       minimumFractionDigits: 0,
                     })}
                   </CardDescription>
-                  <Button className="px-10">add</Button>
+                  <Button className="px-10" onClick={() => dispatch(addtoCart({id: product.id, qty: 1}))}>add</Button>
                 </CardFooter>
               </Card>
             ))}
@@ -51,7 +48,7 @@ const Home = ({ products }) => {
         </div>
 
         <div className="w-1/4 border-l border-border p-5 min-h-screen fixed z-10 bg-white right-0">
-          <Kasir products={products} />
+          <TableCart products={products} />
         </div>
       </div>
     </div>
