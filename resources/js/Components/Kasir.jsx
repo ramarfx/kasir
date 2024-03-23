@@ -10,7 +10,6 @@ const TableCart = (props) => {
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
 
-
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
       const sum = cart.reduce((acc, item) => {
@@ -30,35 +29,38 @@ const TableCart = (props) => {
       <div>
         <h1 className="text-primary font-bold text-2xl mb-5">Keranjang</h1>
 
-        <ScrollArea className=" h-40 border border-border">
-          <div className="flex flex-col gap-3 p-4">
-            {products.length > 0 &&
-              cart.map((item) => {
-                const product = products.find(
-                  (product) => product.id === item.id
-                );
+        {cart.length > 0 ? (
+          <ScrollArea className=" h-40 border border-border">
+            <div className="flex flex-col gap-3 p-4">
+              {products.length > 0 &&
+                cart.map((item) => {
+                  const product = products.find(
+                    (product) => product.id === item.id
+                  );
 
-                return (
-                  <CartItem
-                    title={product.name}
-                    key={item.id}
-                    quantity={item.qty}
-                    price={product.price}
-                  />
-                );
-              })}
-          </div>
-        </ScrollArea>
+                  return (
+                    <CartItem
+                      title={product.name}
+                      key={item.id}
+                      quantity={item.qty}
+                      price={product.price}
+                    />
+                  );
+                })}
+            </div>
+          </ScrollArea>
+        ) : (
+          <div className="h-40">masukin keranjang dulu ges!</div>
+        )}
 
         <div>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">Total</h1>
           <p className="font-bold text-lg">
-            {
-              totalPrice.toLocaleString("id-ID", {
-                style: "currency",
-                currency: "IDR",
-                minimumFractionDigits: 0,
-              })}
+            {totalPrice.toLocaleString("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+            })}
           </p>
         </div>
 
