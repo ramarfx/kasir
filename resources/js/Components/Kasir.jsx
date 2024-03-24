@@ -39,18 +39,18 @@ const TableCart = (props) => {
 
   const { post, data, setData } = useForm();
 
-  function handleChange(e) {
-    setData((e.target.name, e.target.value));
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    post("/payment", values);
+    post("/payment", data);
   }
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+  useEffect(() => {
+    setData('total', totalPrice);
+  }, [totalPrice]);
 
   return (
     <>
