@@ -7,6 +7,7 @@ const Radio = ({ name, value, ...props }) => {
         id={value}
         value={value}
         className="peer hidden"
+        {...props}
       />
       <label
         htmlFor={value}

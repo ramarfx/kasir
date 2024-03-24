@@ -5,11 +5,16 @@ import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { useEffect, useState } from "react";
 import Radio from "./Radio";
+import { router } from "@inertiajs/react";
 
 const TableCart = (props) => {
   const { products } = props;
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [values, setValues] = useState({
+    payment: "",
+    phone: "",
+  });
 
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
@@ -23,7 +28,19 @@ const TableCart = (props) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [products, cart]);
 
-  console.dir(totalPrice);
+  function handleChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
+    setValues((values) => ({
+      ...values,
+      [key]: value,
+    }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    router.post('/payment', values)
+  }
 
   return (
     <>
@@ -56,7 +73,9 @@ const TableCart = (props) => {
 
         <div>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">Total</h1>
-          <p className="font-bold text-lg">
+          <p
+            className="font-bold text-lg"
+          >
             {totalPrice.toLocaleString("id-ID", {
               style: "currency",
               currency: "IDR",
@@ -65,32 +84,37 @@ const TableCart = (props) => {
           </p>
         </div>
 
-        <form method="post" action={route("dashboard")}>
+        <form method="post" action={route("dashboard")} onSubmit={handleSubmit}>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">
             Pembayaran
           </h1>
 
           <div className="grid grid-cols-3 gap-2 mb-4">
-            <Radio name={"payment"} value={"Cash"} />
-            <Radio name={"payment"} value={"ShopeePay"} />
-            <Radio name={"payment"} value={"Gopay"} />
-            <Radio name={"payment"} value={"DANA"} />
-            <Radio name={"payment"} value={"OVO"} />
-            <Radio name={"payment"} value={"Bank"} />
+            <Radio name={"payment"} value={"Cash"} onChange={handleChange} />
+            <Radio
+              name={"payment"}
+              value={"ShopeePay"}
+              onChange={handleChange}
+            />
+            <Radio name={"payment"} value={"Gopay"} onChange={handleChange} />
+            <Radio name={"payment"} value={"DANA"} onChange={handleChange} />
+            <Radio name={"payment"} value={"OVO"} onChange={handleChange} />
+            <Radio name={"payment"} value={"Bank"} onChange={handleChange} />
           </div>
 
           <Input
+            name="phone"
             type="number"
             placeholder={"Masukkan Nomor Telepon E-Wallet"}
+            onChange={handleChange}
           />
-        </form>
 
-        <div className="mt-10">
-          {/* <h1 className="text-primary font-bold text-2xl mt-5">Bayar</h1> */}
-          <Button className="w-full" type="submit">
-            Bayar
-          </Button>
-        </div>
+          <div className="mt-10">
+            <Button className="w-full" type="submit">
+              Bayar
+            </Button>
+          </div>
+        </form>
       </div>
     </>
   );
