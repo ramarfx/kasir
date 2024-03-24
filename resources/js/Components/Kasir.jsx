@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { useEffect, useState } from "react";
+import Radio from "./Radio";
 
 const TableCart = (props) => {
   const { products } = props;
@@ -64,29 +65,31 @@ const TableCart = (props) => {
           </p>
         </div>
 
-        <div>
+        <form method="post" action={route("dashboard")}>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">
             Pembayaran
           </h1>
 
           <div className="grid grid-cols-3 gap-2 mb-4">
-            <Button variant="outline">Cash</Button>
-            <Button variant="outline">ShopeePay</Button>
-            <Button variant="outline">Gopay</Button>
-            <Button variant="outline">DANA</Button>
-            <Button variant="outline">OVO</Button>
-            <Button variant="outline">Bank</Button>
+            <Radio name={"payment"} value={"Cash"} />
+            <Radio name={"payment"} value={"ShopeePay"} />
+            <Radio name={"payment"} value={"Gopay"} />
+            <Radio name={"payment"} value={"DANA"} />
+            <Radio name={"payment"} value={"OVO"} />
+            <Radio name={"payment"} value={"Bank"} />
           </div>
 
           <Input
             type="number"
             placeholder={"Masukkan Nomor Telepon E-Wallet"}
           />
-        </div>
+        </form>
 
         <div className="mt-10">
           {/* <h1 className="text-primary font-bold text-2xl mt-5">Bayar</h1> */}
-          <Button className="w-full">Bayar</Button>
+          <Button className="w-full" type="submit">
+            Bayar
+          </Button>
         </div>
       </div>
     </>

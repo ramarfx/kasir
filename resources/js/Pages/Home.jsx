@@ -15,7 +15,7 @@ import { addtoCart } from "@/redux/slices/cartSlice";
 import TableCart from "@/Components/Kasir";
 
 const Home = ({ products }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -40,7 +40,14 @@ const Home = ({ products }) => {
                       minimumFractionDigits: 0,
                     })}
                   </CardDescription>
-                  <Button className="px-10" onClick={() => dispatch(addtoCart({id: product.id, qty: 1}))}>add</Button>
+                  <Button
+                    className="px-10"
+                    onClick={() =>
+                      dispatch(addtoCart({ id: product.id, qty: 1 }))
+                    }
+                  >
+                    add
+                  </Button>
                 </CardFooter>
               </Card>
             ))}
