@@ -23,7 +23,14 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [ProductController::class, 'index']);
 Route::post('/payment', function (Request $request) {
-  dd($request->all());
+
+  $data = [
+    'total' => $request->total,
+    'payment' => $request->payment,
+    'phone' => $request->phone,
+  ];
+
+  return Inertia::render('Payment', compact('data'));
 });
 
 require __DIR__ . '/auth.php';
