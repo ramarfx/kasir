@@ -78,7 +78,7 @@ const TableCart = (props) => {
             </div>
           </ScrollArea>
         ) : (
-          <div className="h-40">masukin keranjang dulu ges!</div>
+          <div className="h-40 text-primary/50 text-sm">pilih barang yang ingin anda beli</div>
         )}
 
         <div>
