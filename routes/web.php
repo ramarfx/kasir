@@ -39,6 +39,6 @@ Route::get('/payment', function () {
   $products = Product::all();
 
   return Inertia::render('Payment', compact('products'));
-});
+})->middleware(['payment']);
 
 require __DIR__ . '/auth.php';

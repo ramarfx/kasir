@@ -37,7 +37,10 @@ const TableCart = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    post("/payment", data);
+
+    if (data.total > 0) {
+      post("/payment", data);
+    }
   }
 
   useEffect(() => {

@@ -20,6 +20,12 @@ class handlePayment
     // Log::info($request);
     // dd($request->all());
 
+    if (!$request->payment && !$request->total && !$request->phone && $request->total == 0) {
+      Log::info($request->total);
+
+      return Redirect::route('home');
+    }
+
     return $next($request);
   }
 }
