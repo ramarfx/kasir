@@ -15,9 +15,8 @@ class ProductController extends Controller
     public function index()
     {
       $products = Product::all();
-      return Inertia::render('Home', [
-        'products' => $products
-      ]);
+      $user = auth()->user();
+      return Inertia::render('Home', compact(['products', 'user']));
     }
 
     /**

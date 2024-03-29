@@ -30,15 +30,17 @@ Route::post('/payment', function (Request $request) {
     'phone' => $request->phone,
   ];
 
+  $user = auth()->user();
   $products = Product::all();
 
-  return Inertia::render('Payment', compact(['data', 'products']));
-})->middleware(['payment']);
+  return Inertia::render('Payment', compact(['data', 'products', 'user']));
+})->middleware(['payment', 'auth']);
 
 Route::get('/payment', function () {
   $products = Product::all();
+  $user = auth()->user();
 
-  return Inertia::render('Payment', compact('products'));
-})->middleware(['payment']);
+  return Inertia::render('Payment', compact(['products', 'user']));
+})->middleware(['payment', 'auth']);
 
 require __DIR__ . '/auth.php';

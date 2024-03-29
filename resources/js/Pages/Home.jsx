@@ -14,12 +14,12 @@ import { useDispatch } from "react-redux";
 import { addtoCart } from "@/redux/slices/cartSlice";
 import TableCart from "@/Components/Kasir";
 
-const Home = ({ products }) => {
+const Home = ({ user, products }) => {
   const dispatch = useDispatch();
 
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
 
       <div className="flex">
         <div className="w-3/4">

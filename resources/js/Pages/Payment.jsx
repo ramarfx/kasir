@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { useSelector } from "react-redux";
 import { usePDF } from "react-to-pdf";
 
-const payment = ({ data, products }) => {
+const payment = ({ data, products, user }) => {
   const cart = useSelector((state) => state.cart.data);
   const { toPDF, targetRef } = usePDF({
     filename: "invoice.pdf",
@@ -70,6 +70,10 @@ const payment = ({ data, products }) => {
           </p>
         </div>
 
+        <div className="flex justify-between items-center mb-4 bg-primary text-white px-3 py-2">
+          <div>Nama</div>
+          <div className="text-right font-medium">{user.name}</div>
+        </div>
         <div className="flex justify-between items-center mb-4 bg-primary text-white px-3 py-2">
           <div>Metode Pembayaran</div>
           <div className="text-right font-medium">{data && data.payment}</div>
