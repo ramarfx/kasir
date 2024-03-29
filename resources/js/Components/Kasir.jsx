@@ -11,10 +11,6 @@ const TableCart = (props) => {
   const { products } = props;
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [values, setValues] = useState({
-    payment: "",
-    phone: "",
-  });
 
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,16 +22,23 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [ProductController::class, 'index']);
+Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::post('/payment', function (Request $request) {
-
   $data = [
     'total' => $request->total,
     'payment' => $request->payment,
     'phone' => $request->phone,
   ];
 
-  return Inertia::render('Payment', compact('data'));
+  $products = Product::all();
+
+  return Inertia::render('Payment', compact(['data', 'products']));
+})->middleware(['payment']);
+
+Route::get('/payment', function () {
+  $products = Product::all();
+
+  return Inertia::render('Payment', compact('products'));
 });
 
 require __DIR__ . '/auth.php';
