@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use Inertia\Inertia;
 use App\Models\Product;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
-// Route::get('/', function () {
-//     return Inertia::render('Home');
-// });
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::resource('/product', ProductController::class)->except(['index'])->middleware(['isAdmin','auth']);
 
 Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
@@ -22,25 +22,7 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [ProductController::class, 'index'])->name('home');
-Route::post('/payment', function (Request $request) {
-  $data = [
-    'total' => $request->total,
-    'payment' => $request->payment,
-    'phone' => $request->phone,
-  ];
+Route::resource('/payment', PaymentController::class)->only(['index', 'store'])->middleware(['payment', 'auth']);
 
-  $user = auth()->user();
-  $products = Product::all();
-
-  return Inertia::render('Payment', compact(['data', 'products', 'user']));
-})->middleware(['payment', 'auth']);
-
-Route::get('/payment', function () {
-  $products = Product::all();
-  $user = auth()->user();
-
-  return Inertia::render('Payment', compact(['products', 'user']));
-})->middleware(['payment', 'auth']);
 
 require __DIR__ . '/auth.php';

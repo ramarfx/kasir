@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\handlePayment;
+use App\Http\Middleware\PermissionHandle;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
       \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
     ]);
     $middleware->alias([
-      'payment' => handlePayment::class
+      'payment' => handlePayment::class,
+      'isAdmin' => PermissionHandle::class
     ]);
 
     //
