@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
@@ -11,6 +11,7 @@ import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 
 export default function Login({ status, canResetPassword }) {
+  const inputRef = useRef();
   const { data, setData, post, processing, errors, reset } = useForm({
     email: "",
     password: "",
@@ -55,8 +56,9 @@ export default function Login({ status, canResetPassword }) {
             value={data.email}
             className="mt-1 block w-full"
             autoComplete="username"
-            isFocused={true}
+            autoFocus
             onChange={(e) => setData("email", e.target.value)}
+            ref={inputRef}
           />
 
           <InputError message={errors.email} className="mt-2" />
