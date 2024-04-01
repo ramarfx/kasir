@@ -1,10 +1,11 @@
 import { Link } from "@inertiajs/react";
 import NavLink from "./NavLink";
-import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import {  User2 } from "lucide-react";
 import {
+  DropdownMenu,
   DropdownMenuContent,
-} from "@radix-ui/react-dropdown-menu";
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { User2 } from "lucide-react";
 
 const Navbar = (props) => {
   const { user } = props;
@@ -19,8 +20,7 @@ const Navbar = (props) => {
 
           <nav className="flex gap-6 text-sm">
             <Link href="/">Home</Link>
-            <Link href="/">Product</Link>
-            <Link href="/">Cart</Link>
+            <Link href="/dashboard">Dashboard</Link>
           </nav>
         </div>
 
@@ -34,7 +34,7 @@ const Navbar = (props) => {
                     <User2 className="text-primary/70" />
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="border p-2 rounded-md border-border bg-white">
+                <DropdownMenuContent className="border w-5 rounded-md border-border bg-white">
                   <Link href={route("logout")} method="post" as="button">
                     Log Out
                   </Link>
