@@ -1,11 +1,11 @@
 import Navbar from "@/Components/Navbar";
-import { TooltipProvider } from "@/Components/ui/tooltip";
-import { Link } from "@inertiajs/react";
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger,
-} from "@radix-ui/react-tooltip";
+} from "@/Components/ui/tooltip";
+import { Link } from "@inertiajs/react";
 import {
   Home,
   Package2,

@@ -3,6 +3,7 @@ import NavLink from "./NavLink";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { User2 } from "lucide-react";
@@ -35,9 +36,11 @@ const Navbar = (props) => {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border w-5 rounded-md border-border bg-white">
-                  <Link href={route("logout")} method="post" as="button">
-                    Log Out
-                  </Link>
+                  <DropdownMenuItem className="gap-2">
+                    <Link href={route("logout")} method="post" as="button">
+                      Log Out
+                    </Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

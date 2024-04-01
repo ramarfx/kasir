@@ -13,7 +13,8 @@ Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::resource('/product', ProductController::class)->except(['index'])->middleware(['isAdmin','auth']);
 
 Route::get('/dashboard', function () {
-  return Inertia::render('Dashboard');
+  $products = Product::all();
+  return Inertia::render('Dashboard', compact(['products']));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
