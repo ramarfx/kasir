@@ -91,7 +91,7 @@ const TableCart = (props) => {
           </p>
         </div>
 
-        <form method="post" action={route("dashboard")} onSubmit={handleSubmit}>
+        <form method="post" onSubmit={handleSubmit}>
           <h1 className="text-primary font-bold text-2xl mt-5 mb-2">
             Pembayaran
           </h1>

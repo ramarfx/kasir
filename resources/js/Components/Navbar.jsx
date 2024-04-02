@@ -11,8 +11,6 @@ import { User2 } from "lucide-react";
 const Navbar = (props) => {
   const { user } = props;
 
-  console.log(user);
-
   return (
     <header className="w-full flex border-b border-border sticky top-0 z-50 bg-white">
       <div className="container flex h-14 max-w-screen-2xl items-center justify-between">

@@ -22,19 +22,33 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
-import CreateProductPage from "@/Pages/Product/Create";
+import { Head, useForm } from "@inertiajs/react";
 import { MoreHorizontal, PlusCircle } from "lucide-react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/Components/ui/dialog";
+import { Input } from "@/Components/ui/input";
+import InputLabel from "@/Components/InputLabel";
+import InputError from "@/Components/InputError";
 
 export default function Dashboard({ auth, products }) {
+  const { data, setData, post, errors, progress } = useForm({
+    name: "",
+    price: "",
+    image: "",
+  });
+  const submit = (e) => {
+    e.preventDefault();
+
+    post("/product", data);
+    setData({ name: "", price: "", image: "" });
+  };
+
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -47,14 +61,8 @@ export default function Dashboard({ auth, products }) {
       <Head title="Dashboard" />
 
       <header className="flex justify-end">
-        {/* <Button size="sm" className="h-8 gap-1">
-          <PlusCircle className="h-3.5 w-3.5" />
-          <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-            Add Product
-          </span>
-        </Button> */}
         <Dialog>
-          <DialogTrigger>
+          <DialogTrigger asChild>
             <Button size="sm" className="h-8 gap-1">
               <PlusCircle className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -63,7 +71,63 @@ export default function Dashboard({ auth, products }) {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <CreateProductPage />
+            <DialogHeader>
+              <DialogTitle>Tambah Product</DialogTitle>
+              <form onSubmit={submit} method="post">
+                <div className="mt-4">
+                  <InputLabel htmlFor="name" value="Nama Produk" />
+
+                  <Input
+                    id="text"
+                    type="text"
+                    name="name"
+                    value={data.name || ""}
+                    className="mt-1 block w-full"
+                    autoComplete="username"
+                    autoFocus
+                    onChange={(e) => setData("name", e.target.value)}
+                  />
+                  <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                  <InputLabel htmlFor="price" value="Price" />
+
+                  <Input
+                    id="price"
+                    type="number"
+                    name="harga"
+                    value={data.price || ""}
+                    className="mt-1 block w-full"
+                    autoComplete="username"
+                    onChange={(e) => setData("price", e.target.value)}
+                  />
+                  <InputError message={errors.price} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                  <InputLabel htmlFor="image" value="Gambar" />
+                  <Input
+                    type="file"
+                    name="image"
+                    onChange={(e) => setData("image", e.target.files[0])}
+                  />
+                  <InputError message={errors.image} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                  <DialogClose>
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={progress}
+                    >
+                      Tambahkan
+                    </Button>
+                  </DialogClose>
+                </div>
+              </form>
+            </DialogHeader>
           </DialogContent>
         </Dialog>
       </header>
@@ -84,7 +148,7 @@ export default function Dashboard({ auth, products }) {
                     <span className="sr-only">Image</span>
                   </TableHead>
                   <TableHead>Nama Produk</TableHead>
-                  <TableHead className="hidden md:table-cell">Harga</TableHead>
+                  <TableHead className="hidden md:table-cell">Price</TableHead>
                   <TableHead className="hidden md:table-cell">
                     Ditambah
                   </TableHead>
