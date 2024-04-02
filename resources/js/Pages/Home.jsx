@@ -27,7 +27,15 @@ const Home = ({ user, products }) => {
             {products.map((product) => (
               <Card key={product.id}>
                 <CardHeader>
-                  <CardImg src={product.image} />
+                  {product.image ? (
+                    <CardImg
+                      src={`http://localhost:8000/storage/${product.image}`}
+                    />
+                  ) : (
+                    <div className="w-full h-36 bg-primary text-white flex items-center justify-center">
+                      <p>Tidak ada gambar</p>
+                    </div>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <CardTitle>{product.name}</CardTitle>
