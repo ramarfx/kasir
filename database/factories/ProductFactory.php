@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->numerify('product ##'),
             'price' => fake()->numerify('###000'),
-            'image' => 'https://img.lazcdn.com/g/p/db5ee9c40b70ba33d459a160b5e3cc8a.jpg_960x960q80.jpg_.webp'
+            'image' => null
         ];
     }
 }

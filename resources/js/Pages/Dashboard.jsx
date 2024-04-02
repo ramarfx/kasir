@@ -161,7 +161,14 @@ export default function Dashboard({ auth, products }) {
                 {products.map((product) => (
                   <TableRow key={product.id}>
                     <TableCell className="hidden sm:table-cell">
-                      <img src="/a.webp" alt="" />
+                      {product.image ? (
+                        <img
+                          src={`http://localhost:8000/storage/${product.image}`}
+                          alt=""
+                        />
+                      ) : (
+                        <img src="/placeholder/placeholder.jpg" alt="" />
+                      )}
                     </TableCell>
                     <TableCell className="font-medium">
                       {product.name}
