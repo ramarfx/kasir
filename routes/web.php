@@ -10,8 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
-Route::resource('/product', ProductController::class, ['names' => 'product'])->middleware(['isAdmin', 'auth']);
-// Route::post('/product', [ProductController::class, 'store'])->middleware(['isAdmin', 'auth'])->name('product.store');
+Route::resource('/product', ProductController::class)->middleware(['isAdmin', 'auth']);
 
 Route::get('/dashboard', function () {
   $products = Product::all();

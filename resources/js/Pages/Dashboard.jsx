@@ -25,6 +25,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { MoreHorizontal } from "lucide-react";
 import CreateProductPage from "./Product/Create";
+import EditProductPage from "./Product/Edit";
 
 export default function Dashboard({ auth, products }) {
   const { data, setData, post, errors, progress } = useForm({
@@ -51,7 +52,7 @@ export default function Dashboard({ auth, products }) {
       <Head title="Dashboard" />
 
       <header className="flex justify-end">
-        <CreateProductPage/>
+        <CreateProductPage />
       </header>
 
       <main className="mt-5">
@@ -119,7 +120,9 @@ export default function Dashboard({ auth, products }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>
+                          </DropdownMenuItem>
+                            <EditProductPage product={product} />
                           <DropdownMenuItem className="text-red-500 focus:text-red-500">
                             <Link
                               href={route("product.destroy", product.id)}

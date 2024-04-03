@@ -15,15 +15,16 @@ import { PlusCircle } from "lucide-react";
 
 const EditProductPage = ({ product }) => {
   const { data, setData, post, errors, progress } = useForm({
-    name: "",
-    price: "",
-    image: "",
+    _method: "patch",
+    name: product.name,
+    price: product.price,
+    image: product.image,
   });
-  const submit = (e) => {
-    e.preventDefault();
 
-    post("/product", data);
-    setData({ name: "", price: "", image: "" });
+  const submit = (e) => {
+    e.preventDefault();;
+
+    post(route("product.update", product.id));
   };
 
   return (
@@ -39,7 +40,7 @@ const EditProductPage = ({ product }) => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Tambah Product</DialogTitle>
-          <form onSubmit={submit} method="post">
+          <form onSubmit={submit} method="post" encType="multipart/form-data">
             <div className="mt-4">
               <InputLabel htmlFor="name" value="Nama Produk" />
 
