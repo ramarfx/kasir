@@ -120,9 +120,9 @@ export default function Dashboard({ auth, products }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>
-                          </DropdownMenuItem>
+                          <div>
                             <EditProductPage product={product} />
+                          </div>
                           <DropdownMenuItem className="text-red-500 focus:text-red-500">
                             <Link
                               href={route("product.destroy", product.id)}
