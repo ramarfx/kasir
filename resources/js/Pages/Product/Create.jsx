@@ -10,8 +10,10 @@ import {
   DialogTrigger,
 } from "@/Components/ui/dialog";
 import { Input } from "@/Components/ui/input";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { PlusCircle } from "lucide-react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const CreateProductPage = () => {
   const { data, setData, post, errors, progress } = useForm({
@@ -19,6 +21,7 @@ const CreateProductPage = () => {
     price: "",
     image: "",
   });
+
   const submit = (e) => {
     e.preventDefault();
 

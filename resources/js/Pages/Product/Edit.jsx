@@ -10,8 +10,9 @@ import {
   DialogTrigger,
 } from "@/Components/ui/dialog";
 import { Input } from "@/Components/ui/input";
-import { useForm } from "@inertiajs/react";
-import { PlusCircle } from "lucide-react";
+import { useForm, usePage } from "@inertiajs/react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const EditProductPage = ({ product }) => {
   const { data, setData, post, errors, progress } = useForm({
@@ -30,7 +31,11 @@ const EditProductPage = ({ product }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="border-none text-start block focus:ring-0 w-full">
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-none text-start block focus:ring-0 w-full"
+        >
           edit
         </Button>
       </DialogTrigger>
@@ -81,7 +86,12 @@ const EditProductPage = ({ product }) => {
 
             <div className="mt-4">
               <DialogClose>
-                <Button type="submit" className="w-full" disabled={progress}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={progress}
+                  // onClick={() => toast(flash.success)}
+                >
                   Tambahkan
                 </Button>
               </DialogClose>

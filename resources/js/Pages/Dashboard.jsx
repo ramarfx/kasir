@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { MoreHorizontal } from "lucide-react";
 import CreateProductPage from "./Product/Create";
 import EditProductPage from "./Product/Edit";
@@ -33,12 +33,6 @@ export default function Dashboard({ auth, products }) {
     price: "",
     image: "",
   });
-  const submit = (e) => {
-    e.preventDefault();
-
-    post("/product", data);
-    setData({ name: "", price: "", image: "" });
-  };
 
   return (
     <AuthenticatedLayout

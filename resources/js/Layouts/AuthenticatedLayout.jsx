@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/Components/ui/tooltip";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
   Home,
   Package2,
@@ -15,8 +15,17 @@ import {
   Users2,
   UsersRound,
 } from "lucide-react";
+import { useEffect } from "react";
+import { Toaster, toast } from "sonner";
 
 export default function Authenticated({ user, children }) {
+  const { flash } = usePage().props;
+
+  useEffect(() => {
+    {
+      flash.success && toast.success(flash.success);
+    }
+  }, [flash]);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <Navbar user={user} />
@@ -74,6 +83,7 @@ export default function Authenticated({ user, children }) {
       </aside>
 
       <main className="ml-14 flex-1 px-10 pt-5">{children}</main>
+      <Toaster />
     </div>
   );
 }

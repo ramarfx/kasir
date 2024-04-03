@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -41,6 +41,10 @@ class ProductController extends Controller
     }
 
     Product::create($data);
+
+    Session::flash('success', 'Produk berhasil ditambahkan!');
+
+    return redirect()->back();
   }
 
   /**
@@ -74,7 +78,9 @@ class ProductController extends Controller
 
     $product->update($data);
 
-    // return with();
+    Session::flash('success', 'Produk berhasil di ubah!');
+
+    return redirect()->back();
   }
 
   /**
@@ -83,5 +89,9 @@ class ProductController extends Controller
   public function destroy(Product $product)
   {
     $product->delete();
+
+    Session::flash('success', 'Produk berhasil di hapus!');
+
+    return redirect()->back();
   }
 }
