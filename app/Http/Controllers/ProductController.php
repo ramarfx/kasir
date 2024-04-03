@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Product;
-use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -15,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products = Product::all();
-      $user = auth()->user();
-      return Inertia::render('Home', compact(['products', 'user']));
+        $products = Product::all();
+        $user = auth()->user();
+        return Inertia::render('Home', compact(['products', 'user']));
     }
 
     /**
@@ -33,17 +32,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-      $data = $request->validate([
-        'name' => 'required',
-        'price' => 'required|integer',
-        'image' => 'required|image',
-      ]);
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'required|integer',
+            'image' => 'required|image',
+        ]);
 
-      if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('images', 'public');
-      }
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
 
-      Product::create($data);
+        Product::create($data);
     }
 
     /**
@@ -75,6 +74,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
     }
 }

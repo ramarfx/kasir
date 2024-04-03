@@ -13,7 +13,7 @@ import { Input } from "@/Components/ui/input";
 import { useForm } from "@inertiajs/react";
 import { PlusCircle } from "lucide-react";
 
-const CreateProductPage = () => {
+const EditProductPage = ({ product }) => {
   const { data, setData, post, errors, progress } = useForm({
     name: "",
     price: "",
@@ -95,4 +95,4 @@ const CreateProductPage = () => {
   );
 };
 
-export default CreateProductPage;
+export default EditProductPage;

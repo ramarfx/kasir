@@ -22,19 +22,9 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { MoreHorizontal, PlusCircle } from "lucide-react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/Components/ui/dialog";
-import { Input } from "@/Components/ui/input";
-import InputLabel from "@/Components/InputLabel";
-import InputError from "@/Components/InputError";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { MoreHorizontal } from "lucide-react";
+import CreateProductPage from "./Product/Create";
 
 export default function Dashboard({ auth, products }) {
   const { data, setData, post, errors, progress } = useForm({
@@ -61,75 +51,7 @@ export default function Dashboard({ auth, products }) {
       <Head title="Dashboard" />
 
       <header className="flex justify-end">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="sm" className="h-8 gap-1">
-              <PlusCircle className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Add Product
-              </span>
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Tambah Product</DialogTitle>
-              <form onSubmit={submit} method="post">
-                <div className="mt-4">
-                  <InputLabel htmlFor="name" value="Nama Produk" />
-
-                  <Input
-                    id="text"
-                    type="text"
-                    name="name"
-                    value={data.name || ""}
-                    className="mt-1 block w-full"
-                    autoComplete="username"
-                    autoFocus
-                    onChange={(e) => setData("name", e.target.value)}
-                  />
-                  <InputError message={errors.name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                  <InputLabel htmlFor="price" value="Price" />
-
-                  <Input
-                    id="price"
-                    type="number"
-                    name="harga"
-                    value={data.price || ""}
-                    className="mt-1 block w-full"
-                    autoComplete="username"
-                    onChange={(e) => setData("price", e.target.value)}
-                  />
-                  <InputError message={errors.price} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                  <InputLabel htmlFor="image" value="Gambar" />
-                  <Input
-                    type="file"
-                    name="image"
-                    onChange={(e) => setData("image", e.target.files[0])}
-                  />
-                  <InputError message={errors.image} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                  <DialogClose>
-                    <Button
-                      type="submit"
-                      className="w-full"
-                      disabled={progress}
-                    >
-                      Tambahkan
-                    </Button>
-                  </DialogClose>
-                </div>
-              </form>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        <CreateProductPage/>
       </header>
 
       <main className="mt-5">
@@ -199,7 +121,14 @@ export default function Dashboard({ auth, products }) {
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuItem>Edit</DropdownMenuItem>
                           <DropdownMenuItem className="text-red-500 focus:text-red-500">
-                            Delete
+                            <Link
+                              href={route("product.destroy", product.id)}
+                              method="delete"
+                              as="button"
+                              className="w-full text-start"
+                            >
+                              Delete
+                            </Link>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
