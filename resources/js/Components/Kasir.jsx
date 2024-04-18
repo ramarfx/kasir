@@ -57,7 +57,7 @@ const TableCart = (props) => {
         <h1 className="text-primary font-bold text-2xl mb-5">Keranjang</h1>
 
         {cart.length > 0 ? (
-          <ScrollArea className=" h-40 border border-border">
+          <ScrollArea className=" h-96 border border-border">
             <div className="flex flex-col gap-3 p-4">
               {products.length > 0 &&
                 cart.map((item) => {
@@ -67,6 +67,8 @@ const TableCart = (props) => {
 
                   return (
                     <CartItem
+                      productId={product.id}
+                      image={product.image}
                       title={product.name}
                       key={item.id}
                       quantity={item.qty}
