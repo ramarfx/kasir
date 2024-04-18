@@ -15,7 +15,7 @@ const CartItem = ({ title, quantity, price, image, productId }) => {
         {image ? (
           <img
             src={`http://localhost:8000/storage/${image}`}
-            className="size-10"
+            className="size-16 object-cover border"
           />
         ) : (
           <img src="/placeholder/placeholder.jpg" className="size-16" />
