@@ -13,6 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addtoCart } from "@/redux/slices/cartSlice";
 import TableCart from "@/Components/Kasir";
+import { FileWarningIcon } from "lucide-react";
 
 const Home = ({ user, products }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,8 @@ const Home = ({ user, products }) => {
                       src={`http://localhost:8000/storage/${product.image}`}
                     />
                   ) : (
-                    <div className="w-full h-36 bg-primary text-white flex items-center justify-center">
+                    <div className="w-full h-36 bg-primary text-white flex items-center justify-center flex-col gap-2">
+                      <FileWarningIcon />
                       <p>Tidak ada gambar</p>
                     </div>
                   )}

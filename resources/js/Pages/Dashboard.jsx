@@ -23,7 +23,7 @@ import {
 } from "@/Components/ui/table";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
-import { MoreHorizontal } from "lucide-react";
+import { FileWarningIcon, MoreHorizontal } from "lucide-react";
 import CreateProductPage from "./Product/Create";
 import EditProductPage from "./Product/Edit";
 
@@ -84,7 +84,9 @@ export default function Dashboard({ auth, products }) {
                           alt=""
                         />
                       ) : (
-                        <img src="/placeholder/placeholder.jpg" alt="" />
+                        <div className="size-16 bg-primary text-xs text-white text-center flex items-center justify-center">
+                          <FileWarningIcon />
+                        </div>
                       )}
                     </TableCell>
                     <TableCell className="font-medium">

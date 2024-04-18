@@ -5,6 +5,7 @@ import {
   editFromCart,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
+import { FileWarningIcon } from "lucide-react";
 
 const CartItem = ({ title, quantity, price, image, productId }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ const CartItem = ({ title, quantity, price, image, productId }) => {
             className="size-16 object-cover border"
           />
         ) : (
-          <img src="/placeholder/placeholder.jpg" className="size-16" />
+          <div className="size-16 bg-primary text-xs text-white text-center flex items-center justify-center">
+            <FileWarningIcon />
+          </div>
         )}
         <div>
           <h1 className="text-primary font-bold text-base flex gap-2 items-center">
